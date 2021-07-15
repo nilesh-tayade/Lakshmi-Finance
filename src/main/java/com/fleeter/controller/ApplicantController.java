@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fleeter.entities.applicant.Applicant;
+import com.fleeter.entities.applicant.LoginRequest;
 import com.fleeter.repository.ApplicantRepository;
 
 @RestController
@@ -28,6 +29,7 @@ public class ApplicantController {
 	@PostMapping("/")
 	public Applicant saveApplicant(@RequestBody Applicant applicant)
 	{
+		applicant.setRole("applicant");
 		return applicantRepository.save(applicant);
 	}
 	
@@ -56,4 +58,9 @@ public class ApplicantController {
 		return applicantRepository.save(applicant);
 	}
 
+	@PostMapping("/login")
+	public Applicant loginApplicant(@RequestBody LoginRequest loginRequest)
+	{
+		return applicantRepository.findByUsernameAndPassword(loginRequest.getUsername(), loginRequest.getPassword());
+	}
 }

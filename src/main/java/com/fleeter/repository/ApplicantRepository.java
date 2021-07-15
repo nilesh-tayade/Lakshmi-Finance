@@ -8,4 +8,5 @@ import com.fleeter.entities.applicant.Applicant;
 @Repository
 public interface ApplicantRepository extends JpaRepository<Applicant, Integer> {
 
+	public Applicant findByUsernameAndPassword(String username , String password);
 }
